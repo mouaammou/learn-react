@@ -1,18 +1,28 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import BlogList from './blog';
 
 const Home = () => {
 
-    const [elements, setEelms] = useState([
-        {title: 'my new website', body: 'my body is ...', author: 'mouad', id: 1},
-        {title: 'my new website', body: 'my body is ...', author: 'samir', id: 2},
-        {title: 'my new website', body: 'my body is ...', author: 'mouad', id: 3}
-    ]);
+    const [elements, setEelms] = useState(null);
+
+    const [pending, setPending] = useState(true);
+
+    useEffect(() => {
+        setTimeout(() => {
+            fetch("http://localhost:5500/blogs")
+            .then(res => res.json())
+            .then ((data) => 
+            {
+                setEelms(data);
+                setPending(false)
+            })
+        }, 2000);
+    }, [])
 
     return (
         <div className="home">
-          <BlogList elements={elements} title='App blogs title'/>
-          <BlogList elements={elements.filter((ele) => { return ele.author === 'mouad'})} title='Mouad Blogs'/>
+        {pending && <h1>Loading ...</h1> }
+        {elements && <BlogList elements={elements} title='App blogs title'/>}
         </div>
     );
 }
