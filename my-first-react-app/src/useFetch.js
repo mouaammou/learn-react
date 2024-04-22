@@ -7,7 +7,9 @@ const useFetch = (url) => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
+
         const abordConrl = new AbortController();
+        
         setTimeout(() => {
             fetch(url, {
                 signal: abordConrl.signal
@@ -26,8 +28,7 @@ const useFetch = (url) => {
             })
             .catch(err => 
             {
-                if (err.name === 'AbortError')
-                {
+                if (err.name === 'AbortError') {
                     console.log("abord error happens")
                 }
                 else {
