@@ -1,7 +1,7 @@
 import Navbar from "./navbar";
 import Home from "./home";
 import {BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import CreateNews from "./news";
+import CreateNewBlog from "./newBlog";
 
 function App() {
     return (
@@ -11,7 +11,7 @@ function App() {
                 <div className="content">
                     <Routes>
                         <Route exact path="/" element={<Home />} />
-                        <Route exact path="/news" element={<CreateNews />} />
+                        <Route exact path="/create" element={<CreateNewBlog />} />
                     </Routes>
                 </div> 
             </div>

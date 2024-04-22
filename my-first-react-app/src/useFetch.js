@@ -7,26 +7,37 @@ const useFetch = (url) => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
+        const abordConrl = new AbortController();
         setTimeout(() => {
-            fetch(url)
-                .then(res => 
+            fetch(url, {
+                signal: abordConrl.signal
+            })
+            .then(res => 
+            {
+                if ( ! res.ok )
+                    throw Error("could not fetch the resource");
+                return res.json();
+            })
+            .then ((newData) => 
+            {
+                setData(newData);
+                setPending(false);
+                setError(null);
+            })
+            .catch(err => 
+            {
+                if (err.name === 'AbortError')
                 {
-                    if ( ! res.ok )
-                        throw Error("could not fetch the resource");
-                    return res.json();
-                })
-                .then ((newData) => 
-                {
-                    setData(newData);
-                    setPending(false);
-                    setError(null);
-                })
-                .catch(err => 
-                {
+                    console.log("abord error happens")
+                }
+                else {
                     setError(err.message);
                     setPending(false);
-                })
-        }, 2000);
+                }
+            })
+        }, 500);
+
+        return () => {abordConrl.abort()};//clearnup function
     }, [url]);
 
     return {data, pending, error};

@@ -1,4 +1,4 @@
-const CreateNews = () => {
+const CreateNewBlog = () => {
     return (
         <div className="new-news">
             <h1>hello new news about the world</h1>
@@ -6,4 +6,4 @@ const CreateNews = () => {
     );
 }
  
-export default CreateNews;
+export default CreateNewBlog;
