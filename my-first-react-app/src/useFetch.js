@@ -28,10 +28,7 @@ const useFetch = (url) => {
             })
             .catch(err => 
             {
-                if (err.name === 'AbortError') {
-                    console.log("abord error happens")
-                }
-                else {
+                if (err.name !== 'AbortError') {
                     setError(err.message);
                     setPending(false);
                 }
