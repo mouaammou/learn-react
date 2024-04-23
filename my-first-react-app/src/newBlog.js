@@ -1,13 +1,15 @@
 import { useState } from "react";
+import {useNavigate} from 'react-router-dom'
 
 const CreateNewBlog = () => {
     const [title, setTitle] = useState("");
     const [body, setBody] = useState('');
     const [author, setAuthor] = useState('');
     const [send, setSending] = useState(false);
+    const redirect = useNavigate();
 
     const handleSubmit = (e) => {
-        e.preventDefault();
+        e.preventDefault(); 
 
         const formData = {title, body, author}
 
@@ -21,9 +23,10 @@ const CreateNewBlog = () => {
             })
             .then(() => {
                     setSending(false);
+                    redirect('/')
                 }
             )
-        }, 500);
+        }, 700);
     }
 
     return (
