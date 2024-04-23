@@ -4,12 +4,26 @@ const CreateNewBlog = () => {
     const [title, setTitle] = useState("");
     const [body, setBody] = useState('');
     const [author, setAuthor] = useState('');
+    const [send, setSending] = useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
         const formData = {title, body, author}
-        
+
+        setSending(true);
+        setTimeout(() => {
+            
+            fetch('http://localhost:5500/blogs', {
+                method: 'POST',
+                headers: {"Content-type": "application/json"},
+                body: JSON.stringify(formData)
+            })
+            .then(() => {
+                    setSending(false);
+                }
+            )
+        }, 500);
     }
 
     return (
@@ -36,7 +50,8 @@ const CreateNewBlog = () => {
                     value={ author }
                     onChange={(e) => setAuthor(e.target.value)}
                 />
-                <button>Add Blog</button>
+                {!send && <button>Add Blog</button>}
+                {send && <button>Adding ... </button>}
             </form>
         </div>
     );
