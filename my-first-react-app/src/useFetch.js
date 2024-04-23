@@ -38,7 +38,7 @@ const useFetch = (url) => {
             })
         }, 500);
 
-        return () => {abordConrl.abort()};//clearnup function
+        return () => { abordConrl.abort() };//clearnup function
     }, [url]);
 
     return {data, pending, error};

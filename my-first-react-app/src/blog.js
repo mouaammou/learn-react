@@ -17,9 +17,7 @@ const BlogList = ({data, title})=>
                             </Link>
                         </div>
                     )
-                   
-                }
-                )
+                })
             }
         </div>
     );

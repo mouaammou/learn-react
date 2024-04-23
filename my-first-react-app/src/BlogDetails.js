@@ -17,14 +17,15 @@ const BlogData = ({title, author, body}) => {
 const BlogDetails = () => {
     
     const {id} = useParams()
+
     const {data, pending, error} = useFetch(`http://localhost:5500/blogs/${id}`)
 
     return (
-            <div>
-                {error && <h3>could not fetch the data from the the specific resource</h3>}
-                {pending && <h1>Loading ...</h1>}
-                {data && <BlogData title={data.title} author={data.author} body={data.body}/>}
-            </div>
+        <div>
+            {error && <h3>could not fetch the data from the the specific resource</h3>}
+            {pending && <h1>Loading ...</h1>}
+            {data && <BlogData title={data.title} author={data.author} body={data.body}/>}
+        </div>
     );
 }
  
